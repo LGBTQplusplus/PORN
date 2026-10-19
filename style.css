@@ -1,0 +1,58 @@
+@font-face {
+    font-family: pixel-m6x11;
+    src: url("assets/m6x11plus.ttf");
+}
+
+@font-face {
+    font-family: comic;
+    src: url(assets/BadComic-Regular.ttf);
+}
+
+body {
+    background-color: #f7e6e6;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    color: #6c5353;
+    text-align: center;
+    font-family: comic;
+    font-size: 80px;
+    margin-top: 10%;
+}
+
+div[id="zimic"] {
+    content: url("assets/zimic.png");
+    width: 18vw;
+    opacity: 0.8;
+    image-rendering: pixelated;
+    position: absolute;
+    left: 0;
+    bottom: -40px;
+}
+
+button[id="uploadButton"] {
+    margin: 20px auto;
+    padding: 0px 30px;
+    font-family: pixel-m6x11;
+    font-size: 80px;
+    font-weight: bold;
+    color: white;
+    background: transparent;
+    border: 16px solid transparent; 
+    border-image-source: url("assets/button.png");
+    border-image-slice: 32 fill;
+    cursor: pointer;
+    text-shadow: 4px 4px #a04646;
+    image-rendering: pixelated;
+    transition-duration: 150ms;
+} 
+
+button[id="uploadButton"]:hover {
+    filter: drop-shadow(4px 12px 4px #caaeae);
+}
+
+input[type="file"] {
+    display:none;
+}
