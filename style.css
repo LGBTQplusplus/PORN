@@ -75,6 +75,36 @@ button[id="uploadButton"]:hover {
     filter: drop-shadow(4px 12px 4px #caaeae);
 }
 
+a[id="loginDiscord"] {
+    margin: 20px auto;
+    padding: 0px 30px;
+    filter: hue-rotate(260deg);
+    font-family: pixel-m6x11;
+    display: inline-flex;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background: transparent;
+    border: 16px solid transparent; 
+    border-image-source: url("assets/button.png");
+    border-image-slice: 32 fill;
+    cursor: pointer;
+    text-shadow: 4px 4px #a04646;
+    text-rendering: pixelated;
+    image-rendering: pixelated;
+    transition-duration: 150ms;
+}
+
+img[id="discordLogo"] {
+    width: 32px;
+    filter: drop-shadow(4px 4px 0 #a04646);
+    image-rendering: pixelated;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
 input[type="file"] {
     display:none;
 }

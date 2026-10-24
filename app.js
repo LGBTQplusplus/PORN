@@ -1,6 +1,15 @@
 const button = document.getElementById("uploadButton");
 const fileOpener = document.getElementById("csvFileInput");
 const taskSelect = document.getElementById("homework");
+const discordLogin = document.getElementById("loginDiscord");
+
+let params = new URLSearchParams(window.location.search);
+
+if (params.has("code")) {
+    discordLogin.textContent = "Logged in with Discord :P";
+    discordLogin.style.pointerEvents = "none";
+    discordLogin.style.opacity = "0.5";
+}
 
 button.onclick = () => {
     fileOpener.click();
@@ -12,22 +21,30 @@ fileOpener.onchange = async () => {
 
     console.log(task, file);
 
-    sendFile(file, task);
+    sendFile(file, task, params.get("code"));
 }
 
-sendFile = (file, task) => {
-    // TODO: send cpp file via github api
+sendFile = async (file, task, discordCode) => {
+    let text = await file.text();
+
+    let response = await fetch("https://secret-worker.nejc-gostisa.workers.dev/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            filename: file.name,
+            content: text,
+            task: task,
+            discordCode: discordCode
+        })
+    });
+
+    let result = await response.json();
+
+    console.log(result);
 }
 
 analyseResults = (text) => {
-    let lines = text.trim().split(/\r?\n/);
-
-    let table = lines.slice(1).map(line => {
-        let cols = line.split(',');
-        return {
-            name: cols[0],
-            time: parseFloat(cols[1]),
-            result: cols[2]
-        };
-    });
+    
 }
