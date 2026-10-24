@@ -45,8 +45,11 @@ sendFile = async (file, task, discordCode) => {
     let result = await response.json();
 
     console.log(result);
-
-    fileConfirm.textContent = "File uploaded successfully as " + result.filename + " for task " + result.task;
+    if (result.success) {
+        fileConfirm.textContent = "File uploaded successfully as " + result.filename + " for task " + result.task;
+    } else {
+        fileConfirm.textContent = "Error uploading file: " + result.error;
+    }
 }
 
 analyseResults = (text) => {
