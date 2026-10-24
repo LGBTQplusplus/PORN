@@ -2,6 +2,7 @@ const button = document.getElementById("uploadButton");
 const fileOpener = document.getElementById("csvFileInput");
 const taskSelect = document.getElementById("homework");
 const discordLogin = document.getElementById("loginDiscord");
+const fileConfirm = document.getElementById("fileConfirm");
 
 let params = new URLSearchParams(window.location.search);
 
@@ -36,13 +37,16 @@ sendFile = async (file, task, discordCode) => {
             filename: file.name,
             content: text,
             task: task,
-            discordCode: discordCode
+            discordCode: discordCode,
+            redirect_uri: window.location.origin + window.location.pathname
         })
     });
 
     let result = await response.json();
 
     console.log(result);
+
+    fileConfirm.textContent = "File uploaded successfully as " + result.filename + " for task " + result.task;
 }
 
 analyseResults = (text) => {

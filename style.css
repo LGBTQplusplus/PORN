@@ -105,6 +105,16 @@ img[id="discordLogo"] {
     margin-left: 10px;
 }
 
+div[id="fileConfirm"] {
+    margin: 10px auto;
+    padding: 0px 30px;
+    font-family: pixel-m6x11;
+    font-size: 30px;
+    font-weight: bold;
+    color: #6c5353;
+    text-align: center;
+}
+
 input[type="file"] {
     display:none;
 }
