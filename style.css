@@ -8,6 +8,10 @@
     src: url(assets/BadComic-Regular.ttf);
 }
 
+/*
+    TODO: make this look ok on mobile.
+*/
+
 body {
     background-color: #f7e6e6;
     display: flex;
@@ -30,6 +34,24 @@ div[id="zimic"] {
     position: absolute;
     left: 0;
     bottom: -40px;
+}
+
+select[id="homework"] {
+    margin: 20px auto;
+    padding: 0px 30px;
+    filter: hue-rotate(90deg);
+    font-family: pixel-m6x11;
+    font-size: 80px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background: transparent;
+    border: 16px solid transparent; 
+    border-image-source: url("assets/button.png");
+    border-image-slice: 32 fill;
+    cursor: pointer;
+    text-shadow: 4px 4px #a04646;
+    image-rendering: pixelated;
 }
 
 button[id="uploadButton"] {

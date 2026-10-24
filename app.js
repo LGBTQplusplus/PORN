@@ -1,16 +1,22 @@
 const button = document.getElementById("uploadButton");
 const fileOpener = document.getElementById("csvFileInput");
+const taskSelect = document.getElementById("homework");
 
 button.onclick = () => {
     fileOpener.click();
 }
 
 fileOpener.onchange = async () => {
-    let text = await fileOpener.files[0].text();
+    let file = await fileOpener.files[0];
+    let task = taskSelect.value;
 
-    console.log(text);
+    console.log(task, file);
 
-    analyseResults(text);
+    sendFile(file, task);
+}
+
+sendFile = (file, task) => {
+    // TODO: send cpp file via github api
 }
 
 analyseResults = (text) => {
