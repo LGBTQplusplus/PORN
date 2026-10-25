@@ -21,6 +21,16 @@ fileOpener.onchange = async () => {
     let task = taskSelect.value;
 
     console.log(task, file);
+    let selectedTask = taskSelect.options[taskSelect.selectedIndex].text;
+
+    let taskOptions = Array.from(taskSelect.options).map(option => option.text);
+
+    console.log(selectedTask, file.name.split(".")[0], taskOptions.includes(file.name.split(".")[0]));
+
+    if (file.name.split(".")[0] !== selectedTask && taskOptions.includes(file.name.split(".")[0])) {
+        fileConfirm.textContent = "File name matches different task than selected. Please select the correct task from the dropdown.";
+        return;
+    }
 
     sendFile(file, task, params.get("code"));
 }
