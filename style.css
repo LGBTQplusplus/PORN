@@ -75,6 +75,13 @@ button[id="uploadButton"]:hover {
     filter: drop-shadow(4px 12px 4px #caaeae);
 }
 
+gif[id="loadingGif"] {
+    margin: 20px auto;
+    height: 100px;
+    image-rendering: pixelated;
+    content: url("assets/loading.gif");
+}
+
 a[id="loginDiscord"] {
     margin: 20px auto;
     padding: 0px 30px;
