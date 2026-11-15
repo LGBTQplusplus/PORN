@@ -7,18 +7,33 @@ const loadingGif = document.getElementById("loadingGif");
 
 let params = new URLSearchParams(window.location.search);
 
-if (params.has("code") || localStorage.getItem("sessionId")) {
-    discordLogin.textContent = "Logged in with Discord :P";
-    discordLogin.style.pointerEvents = "none";
-    discordLogin.style.opacity = "0.5";
-}
+// the oauth code is single use
+let loginCode = params.get("code");
+const discordMarkup = discordLogin.innerHTML;
+
+const hasAuth = () => Boolean(loginCode || localStorage.getItem("sessionId"));
+
+const setLoginLocked = (locked) => {
+    if (locked) {
+        discordLogin.textContent = "Logged in with Discord :P";
+        discordLogin.style.pointerEvents = "none";
+        discordLogin.style.opacity = "0.5";
+    } else {
+        discordLogin.innerHTML = discordMarkup;
+        discordLogin.style.pointerEvents = "";
+        discordLogin.style.opacity = "";
+    }
+};
+
+if (hasAuth()) setLoginLocked(true);
 
 button.onclick = () => {
-    if (!params.has("code") && !localStorage.getItem("sessionId")) {
+    if (!hasAuth()) {
         fileConfirm.textContent = "Please log in with Discord first.";
         return;
     }
 
+    fileOpener.value = ""; // fires onchange
     fileOpener.click();
 }
 
@@ -41,7 +56,7 @@ fileOpener.onchange = async () => {
     button.style.display = "none";
     loadingGif.style.display = "block";
 
-    sendFile(file, task, params.get("code"));
+    sendFile(file, task, loginCode);
 }
 
 sendFile = async (file, task, discordCode) => {
@@ -66,13 +81,24 @@ sendFile = async (file, task, discordCode) => {
         let result = await response.json();
 
         console.log(result);
+
+        // the worker hands back a session even when the github write failed
+        if (result.sessionId) {
+            localStorage.setItem("sessionId", result.sessionId);
+            loginCode = null;
+            if (params.has("code")) {
+                params.delete("code");
+                history.replaceState(null, "", window.location.pathname);
+            }
+            setLoginLocked(true);
+        }
+
         if (result.success) {
             fileConfirm.textContent = "File uploaded successfully as " + result.filename + " for task " + result.task;
-            if (result.sessionId) {
-                localStorage.setItem("sessionId", result.sessionId);
-            }
-        } else if (result.error && result.error.toLowerCase().includes("session")) {
+        } else if (result.error && /session|expired|log ?in|code/i.test(result.error)) {
             localStorage.removeItem("sessionId");
+            loginCode = null;
+            setLoginLocked(false);
             fileConfirm.textContent = "Error uploading file: " + result.error + " (log in again and retry.)";
         } else {
             fileConfirm.textContent = "Error uploading file: " + (result.error || "unknown error");
@@ -83,6 +109,7 @@ sendFile = async (file, task, discordCode) => {
 
     loadingGif.style.display = "none";
     button.style.display = "block";
+    fileOpener.value = "";
 }
 
 analyseResults = (text) => {
