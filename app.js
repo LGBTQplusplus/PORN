@@ -59,7 +59,7 @@ sendFile = async (file, task, discordCode) => {
                 task: task,
                 discordCode: discordCode,
                 sessionId: localStorage.getItem("sessionId"),
-                redirect_uri: window.location.origin + window.location.pathname
+                redirect_uri: window.location.origin
             })
         });
 
