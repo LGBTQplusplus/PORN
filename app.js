@@ -1,3 +1,5 @@
+//const { use } = require("react");
+
 const button = document.getElementById("uploadButton");
 const fileOpener = document.getElementById("csvFileInput");
 const taskSelect = document.getElementById("homework");
@@ -5,7 +7,130 @@ const discordLogin = document.getElementById("loginDiscord");
 const fileConfirm = document.getElementById("fileConfirm");
 const loadingGif = document.getElementById("loadingGif");
 
+const resultsDiv = document.getElementById("resultsSide");
+
+const upArrow = document.getElementById("upArrow");
+const downArrow = document.getElementById("downArrow");
+const upperResults = document.getElementById("upperResults");
+const lowerResults = document.getElementById("lowerResults");
+const taskName = document.getElementById("taskName");
+const noSubmissionsYet =document.getElementById("noSubmissionsYet");
+const resultsText = document.getElementById("results");
+const resultsPlacementColumn = document.getElementById("resultsPlacementColumn");
+const resultsNameColumn = document.getElementById("resultsNameColumn");
+const resultsTimeColumn = document.getElementById("resultsTimeColumn");
+
 let params = new URLSearchParams(window.location.search);
+
+let allTasks = ["zlivanje", "neboticniki", "mediane", "autocomplete", "vreca", "vzorec"];
+let curTask = 0;
+
+let results = {};
+let username = "";
+
+async function fetchResults() {
+    results = await fetch("https://secret-worker.nejc-gostisa.workers.dev/", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Reason": "results"
+        }
+    });
+    
+    results = await results.json();
+    
+    console.log(results);
+
+    updateResults(curTask);
+}
+
+fetchResults();
+
+async function updateResults(index) {
+    if (!localStorage.getItem("taskUsername") && localStorage.getItem("sessionId")) {
+        let nameRequest = await fetch("https://secret-worker.nejc-gostisa.workers.dev/", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Reason": "username",
+                "sessionId": localStorage.getItem("sessionId")
+            }
+        });
+
+        username = nameRequest.text();
+        localStorage.setItem("taskUsername", username);
+    }
+
+    formatResults(index);
+}
+
+function formatResults(index) {
+    if (index < 0 || index >= allTasks.length) return "";
+
+    const task = allTasks[index];
+    taskName.textContent = task;
+
+    const data = results[task] || [];
+
+    if (data.length === 0) {
+        console.log("no submissions for " + task);
+        noSubmissionsYet.style.display = "block";
+
+        resultsPlacementColumn.innerHTML = "";
+        resultsNameColumn.innerHTML = "";
+        resultsTimeColumn.innerHTML = "";
+        return;
+    }
+
+    noSubmissionsYet.style.display = "none";
+
+    data.sort((a, b) => {
+        if (!a["time"]) return 1;
+        if (!b["time"]) return -1;
+        return a["time"] - b["time"];
+    });
+
+    let resultsColumn = "";
+    let nameColumn = "";
+    let timeColumn = "";
+
+    for (let i = 0; i < data.length; i++) {
+        if (data[i]["time"]) {
+            resultsColumn += `<div class="rank-blob"> ${i+1} </div>`;
+            nameColumn += "<div class=\"sized\">" + data[i]["username"] + "</div>";
+            timeColumn += "<div class=\"sized\">" + data[i]["time"] + "ms" + "</div>";
+        } else {
+            resultsColumn += `<div class="rank-blob"> DNF </div>`;
+            nameColumn += "<div class=\"sized\">" + data[i]["username"] + "</div>";
+            timeColumn += "<div class=\"sized\">" + "X" + "</div>";
+        }
+    }
+
+    resultsPlacementColumn.innerHTML = resultsColumn;
+    resultsNameColumn.innerHTML = nameColumn;
+    resultsTimeColumn.innerHTML = timeColumn;
+
+    //return formatted;
+}
+
+resultsDiv.onmouseenter = () => {
+    upArrow.style.display = "block";
+    downArrow.style.display = "block";
+}
+
+upArrow.onclick = () => {
+    if (curTask > 0) {
+        curTask--;
+        updateResults(curTask);
+    }
+}
+
+downArrow.onclick = () => {
+    if (curTask < allTasks.length - 1) {
+        curTask++;
+        updateResults(curTask);
+    }
+}
 
 // the oauth code is single use
 let loginCode = params.get("code");
@@ -59,7 +184,7 @@ fileOpener.onchange = async () => {
     sendFile(file, task, loginCode);
 }
 
-sendFile = async (file, task, discordCode) => {
+async function sendFile(file, task, discordCode) {
     let text = await file.text();
 
     try {
@@ -112,6 +237,6 @@ sendFile = async (file, task, discordCode) => {
     fileOpener.value = "";
 }
 
-analyseResults = (text) => {
+function analyseResults(text) {
     
 }

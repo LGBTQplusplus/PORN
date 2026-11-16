@@ -1,8 +1,11 @@
+<!DOCTYPE html>
+
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
 <body>
+    <div id="uploadSide">
     <h1>
         Gimme your file, twin
     </h1>
@@ -16,6 +19,8 @@
         <option value="vreca">vreca</option>
         <option value="vzorec">vzorec</option>
     </select>
+
+    <gif id="selectTutorial"></gif>
     
     <button onclick="uploadButtonClicked()" id="uploadButton">
         Upload
@@ -33,6 +38,27 @@
     <div id="fileConfirm"></div>
 
     <div id="zimic"></div>
-    <script src="app.js"></script>
+    
+    </div>
+
+    <div id="resultsSide">
+        <img id="upArrow" src="assets/upArrow.png"></img>
+        <div id="upperResults">
+            <div id="upperResultsPlacementColumn">
+
+            </div>
+        </div>
+        <div id="taskName"></div>
+        <img id="noSubmissionsYet" src="assets/noSubmissionsYet.png"></img>
+        <div id="results">
+            <div id="resultsPlacementColumn"></div>
+            <div id="resultsNameColumn"></div>
+            <div id="resultsTimeColumn"></div>
+        </div>
+        <div id="lowerResults"></div>
+        <img id="downArrow" src="assets/downArrow.png"></img>
+    </div>
 </body>
+
+<script src="app.js"></script>
 </html>

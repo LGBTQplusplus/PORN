@@ -12,10 +12,142 @@
     TODO: make this look ok on mobile.
 */
 
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     background-color: #f7e6e6;
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+div[id="uploadSide"] {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 100vh;
+}
+
+div[id="resultsSide"] {
+    display: flex;
+    background-color: #E6F7E6;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    height: 90vh;
+    border: 8px #AECAAE solid;
+}
+
+img[id="upArrow"] {
+    justify-self: flex-start;
+    margin: 10px;
+}
+
+div[id="upperResults"] {
+    width: 100%;
+    height: 15%;
+    overflow-y: auto;
+    text-align: center;
+    opacity: 0.5;
+}
+
+div[id="taskName"] {
+    height: 100px;
+    font-family: pixel-m6x11;
+    font-size: 30px;
+}
+
+img[id="noSubmissionsYet"] {
+    height: 70%;
+    transform: translateY(50%) scale(3);
+    display: none;
+    content: url("assets/noSubmissionsYet.png");
+}
+
+div[id="results"] {
+    width: 100%;
+    height: 70%;
+    margin: -10px;
+    overflow-y: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+div[id="resultsPlacementColumn"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: pixel-m6x11;
+    font-size: 30px;
+    width: 10%;
+}
+
+.sized {
+    height: 48px;
+}
+
+.rank-blob {
+    width: 48px;
+    height: 48px;
+    background-image: url("assets/blob.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    image-rendering: pixelated;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(2px 2px 2px #aecaae);
+}
+
+div[id="resultsNameColumn"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: pixel-m6x11;
+    font-size: 30px;
+    width: 60%;
+}
+
+div[id="resultsTimeColumn"] {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-items: flex-start;
+    justify-content: center;
+    font-family: pixel-m6x11;
+    font-size: 30px;
+    width: 20%;
+}
+
+div[id="lowerResults"] {
+    width: 100%;
+    height: 15%;
+    overflow-y: auto;
+    text-align: center;
+    opacity: 0.5;
+}
+
+img[id="downArrow"] {
+    justify-self: flex-end;
+    margin: 10px;
 }
 
 h1 {
@@ -23,7 +155,7 @@ h1 {
     text-align: center;
     font-family: comic;
     font-size: 80px;
-    margin-top: 10%;
+    margin-bottom: 160px;
 }
 
 div[id="zimic"] {
@@ -41,7 +173,7 @@ select[id="homework"] {
     padding: 0px 30px;
     filter: hue-rotate(90deg);
     font-family: pixel-m6x11;
-    font-size: 80px;
+    font-size: 60px;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -58,7 +190,7 @@ button[id="uploadButton"] {
     margin: 20px auto;
     padding: 0px 30px;
     font-family: pixel-m6x11;
-    font-size: 80px;
+    font-size: 60px;
     font-weight: bold;
     color: white;
     background: transparent;
@@ -71,7 +203,7 @@ button[id="uploadButton"] {
     transition-duration: 150ms;
 } 
 
-button[id="uploadButton"]:hover {
+button:hover {
     filter: drop-shadow(4px 12px 4px #caaeae);
 }
 
