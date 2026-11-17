@@ -14,7 +14,7 @@ const downArrow = document.getElementById("downArrow");
 const upperResults = document.getElementById("upperResults");
 const lowerResults = document.getElementById("lowerResults");
 const taskName = document.getElementById("taskName");
-const noSubmissionsYet =document.getElementById("noSubmissionsYet");
+const noSubmissionsYet =document.getElementById("noSubmissionsYetDiv");
 const resultsText = document.getElementById("results");
 const resultsPlacementColumn = document.getElementById("resultsPlacementColumn");
 const resultsNameColumn = document.getElementById("resultsNameColumn");
@@ -74,7 +74,7 @@ function formatResults(index) {
 
     if (data.length === 0) {
         console.log("no submissions for " + task);
-        noSubmissionsYet.style.display = "block";
+        noSubmissionsYet.style.display = "flex";
 
         resultsPlacementColumn.innerHTML = "";
         resultsNameColumn.innerHTML = "";
