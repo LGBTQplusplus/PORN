@@ -71,7 +71,7 @@ div[id="taskName"] {
 }
 
 img[id="noSubmissionsYet"] {
-    height: 70%;
+    width: 100%;
     transform: translateY(50%) scale(3);
     display: none;
     content: url("assets/noSubmissionsYet.png");
