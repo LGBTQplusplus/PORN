@@ -96,7 +96,7 @@ function formatResults(index) {
 
     for (let i = 0; i < data.length; i++) {
         if (data[i]["time"]) {
-            resultsColumn += `<div class="rank-blob"> ${i+1} </div>`;
+            resultsColumn += `<div class="rank-blob">${i+1}</div>`;
             nameColumn += "<div class=\"sized\">" + data[i]["username"] + "</div>";
             timeColumn += "<div class=\"sized\">" + data[i]["time"] + "ms" + "</div>";
         } else {
