@@ -92,6 +92,7 @@ div[id="results"] {
     text-align: center;
     display: flex;
     flex-direction: row;
+    padding-top: 12px;
 }
 
 div[id="resultsPlacementColumn"] {
