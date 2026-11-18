@@ -22,7 +22,7 @@ const resultsTimeColumn = document.getElementById("resultsTimeColumn");
 
 let params = new URLSearchParams(window.location.search);
 
-let allTasks = ["zlivanje", "neboticniki", "mediane", "autocomplete", "vreca", "vzorec"];
+let allTasks = ["zlivanje", "neboticniki", "mediane", "autocomplete", "vreca", "vzorec", "ni še naslednje naloge", "ni še naslednje naloge", "še zmeri ni naslednje naloge"];
 let curTask = 0;
 
 let results = {};
