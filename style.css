@@ -194,7 +194,7 @@ select[id="homework"] {
     image-rendering: pixelated;
 }
 
-option {
+#homework option {
     color: black;
     background-color: white;
     font-size: 20px;
