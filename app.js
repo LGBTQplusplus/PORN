@@ -24,6 +24,7 @@ let params = new URLSearchParams(window.location.search);
 
 let allTasks = ["zlivanje", "neboticniki", "mediane", "autocomplete", "vreca", "vzorec", "ni še naslednje naloge", "ni še naslednje naloge", "še zmeri ni naslednje naloge"];
 let curTask = 0;
+let placementColours = ["#ffe469", "#c9dde5", "#d46751", "#ffffff", "#705159"];
 
 let results = {};
 let username = "";
@@ -95,12 +96,13 @@ function formatResults(index) {
     let timeColumn = "";
 
     for (let i = 0; i < data.length; i++) {
+
         if (data[i]["time"]) {
-            resultsColumn += `<div class="rank-blob">${i+1}</div>`;
+            resultsColumn += `<div class="rank-blob" style="--his-color: ${placementColours[Math.min(i, 3)]}">${i+1}.</div>`;
             nameColumn += "<div class=\"sized\">" + data[i]["username"] + "</div>";
             timeColumn += "<div class=\"sized\">" + data[i]["time"] + "ms" + "</div>";
         } else {
-            resultsColumn += `<div class="rank-blob"> DNF </div>`;
+            resultsColumn += `<div class="rank-blob" style="--his-color: ${placementColours[4]}"> DNF </div>`;
             nameColumn += "<div class=\"sized\">" + data[i]["username"] + "</div>";
             timeColumn += "<div class=\"sized\">" + "X" + "</div>";
         }

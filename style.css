@@ -99,10 +99,13 @@ div[id="resultsPlacementColumn"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
+    color: #fff;
     font-family: pixel-m6x11;
     font-size: 30px;
+    -webkit-text-stroke: 4px #000;
+    paint-order: stroke fill;
     width: 10%;
 }
 
@@ -113,22 +116,36 @@ div[id="resultsPlacementColumn"] {
 .rank-blob {
     width: 48px;
     height: 48px;
-    background-image: url("assets/blob.gif");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    image-rendering: pixelated;
     display: flex;
     align-items: center;
     justify-content: center;
     filter: drop-shadow(2px 2px 2px #aecaae);
 }
 
+.rank-blob::before {
+    position: absolute;
+    z-index: -1;
+    background-image: url("assets/blob.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--his-color);
+    background-blend-mode: multiply;
+    background-size: contain;
+    mask-image: url("assets/blob.gif");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    content: "";
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated;
+}
+
 div[id="resultsNameColumn"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-family: pixel-m6x11;
     font-size: 30px;
     width: 60%;
@@ -139,7 +156,7 @@ div[id="resultsTimeColumn"] {
     flex-direction: column;
     width: 30%;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     font-family: pixel-m6x11;
     font-size: 30px;
     width: 20%;
