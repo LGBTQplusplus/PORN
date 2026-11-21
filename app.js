@@ -22,7 +22,7 @@ const resultsTimeColumn = document.getElementById("resultsTimeColumn");
 
 let params = new URLSearchParams(window.location.search);
 
-let allTasks = ["zlivanje", "neboticniki", "mediane", "autocomplete", "vreca", "vzorec", "ni še naslednje naloge", "ni še naslednje naloge", "še zmeri ni naslednje naloge"];
+let allTasks = ["zlivanje", "neboticniki", "mediane", "autocomplete", "vreca", "vzorec", "razporeditev", "ni še naslednje naloge", "ni še naslednje naloge", "še zmeri ni naslednje naloge"];
 let curTask = 0;
 let placementColours = ["#ffe469", "#c9dde5", "#d46751", "#ffffff", "#705159"];
 
