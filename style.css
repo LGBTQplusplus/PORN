@@ -14,6 +14,14 @@
 
 * {
     box-sizing: border-box;
+    font-family: pixel-m6x11;
+    font-size: 32px;
+}
+
+.whiteWithStroke {
+    color: #fff;
+    -webkit-text-stroke: 4px #000;
+    paint-order: stroke fill;
 }
 
 html, body {
@@ -84,38 +92,26 @@ img[id="noSubmissionsYet"] {
     content: url("assets/noSubmissionsYet.png");
 }
 
-div[id="results"] {
-    width: 100%;
+div[id="resultsDiv"] {
+    width: 90%;
     height: 70%;
     margin: -10px;
     overflow-y: auto;
     text-align: center;
-    display: flex;
-    flex-direction: row;
     padding-top: 12px;
 }
 
-div[id="resultsPlacementColumn"] {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    color: #fff;
-    font-family: pixel-m6x11;
-    font-size: 30px;
-    -webkit-text-stroke: 4px #000;
-    paint-order: stroke fill;
-    width: 10%;
+table[id="results"] {
+    width: 100%;
 }
 
 .sized {
-    height: 48px;
+    height: 64px;
 }
 
 .rank-blob {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,27 +135,6 @@ div[id="resultsPlacementColumn"] {
     width: 48px;
     height: 48px;
     image-rendering: pixelated;
-}
-
-div[id="resultsNameColumn"] {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: pixel-m6x11;
-    font-size: 30px;
-    width: 60%;
-}
-
-div[id="resultsTimeColumn"] {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    align-items: flex-start;
-    justify-content: flex-start;
-    font-family: pixel-m6x11;
-    font-size: 30px;
-    width: 20%;
 }
 
 div[id="lowerResults"] {
