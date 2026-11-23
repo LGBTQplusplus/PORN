@@ -86,6 +86,8 @@ async function updateResults(index) {
 function formatResults(index) {
     if (index < 0 || index >= allTasks.length) return "";
 
+resultsText.innerHTML = "";
+
     const task = allTasks[index];
     taskName.textContent = task;
 
